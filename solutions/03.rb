@@ -161,9 +161,8 @@ module Graphics
     def draw_bresenham(from, to, delta_e, coordinate, x_or_y)
       error, coordinates = 0, []
       from.upto(to).each do |x|
-        error = error + delta_e
         coordinates << (x_or_y == :x ? [x, coordinate] : [coordinate, x])
-        coordinate, error = calculate_coordinate_error coordinate, error
+        coordinate, error = calculate_coordinate_error coordinate, error + delta_e
       end
       coordinates
     end
@@ -181,12 +180,9 @@ module Graphics
     def draw_by_y
       delta_x = @to.x - @from.x
       delta_y = @to.y - @from.y
-      if delta_y == 0
-        return (@from.x).upto(@to.x).map { |x| [x, @to.y] }
-      else
-        from, to = @from.y > @to.y ?  [@to, @from] : [@from, @to]
-        draw_bresenham(from.y, to.y, delta_x / delta_y.to_f, from.x, :y)
-      end
+      return (@from.x).upto(@to.x).map { |x| [x, @to.y] } if delta_y == 0
+      from, to = @from.y > @to.y ?  [@to, @from] : [@from, @to]
+      draw_bresenham(from.y, to.y, delta_x / delta_y.to_f, from.x, :y)
     end
   end
 
