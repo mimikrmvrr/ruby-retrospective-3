@@ -3,8 +3,8 @@ require 'prime'
 class Integer
   def prime?
     return false if self < 2
-    2.upto(Math.sqrt(abs)).each do |potential_divisor|
-      return false if self % potential_divisor == 0
+    2.upto(Math.sqrt(abs)).each do |n|
+      return false if self % n == 0
     end
     true
   end
