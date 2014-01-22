@@ -41,7 +41,7 @@ class TodoList
   end
 
   def completed?
-    count_by_status(:done) == tasks.count
+    tasks_completed == tasks.count
   end
 end
 
