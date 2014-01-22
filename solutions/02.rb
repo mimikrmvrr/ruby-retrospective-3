@@ -73,11 +73,11 @@ end
 
 class Criterion
   def initialize(&block)
-    @matcher = block
+    @matching = block
   end
 
   def match?(task)
-    @matcher.call task
+    @matching.call task
   end
 
   def &(other)
