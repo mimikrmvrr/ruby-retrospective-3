@@ -38,11 +38,10 @@ class Array
     each_slice(n).map { |s| if s.size == n then s[0...-1] else s end }.flatten
   end
 
-  def combine_with(array)
-    if array.size <= size
-      zip(array).flatten.compact
-    else
-      zip(array).flatten.compact + array.drop(size)
-    end
+  def combine_with(other)
+    shorter, longer = size < other.size ? [self, other] : [other, self]
+    common = take(shorter.size).zip(other).flatten(1)
+    rest = longer.drop(shorter.size)
+    common + rest
   end
 end
