@@ -9,7 +9,9 @@ module Graphics
     end
 
     def set_pixel(x, y)
-      @pixels[y*@width + x] = :full
+      if @width > x and @height > y
+        @pixels[y*@width + x] = :full
+      end
     end
 
     def pixel_at?(x, y)
